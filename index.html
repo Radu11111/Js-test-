@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Button Class Example</title>
+    <style>
+        .form {
+            border: 1px solid #999;
+            padding: 20px;
+        }
+        #actions2 button  {
+            width: 100px;
+            position: relative;
+            left: 70px;
+            top: -60px;
+            
+        }
+
+        button,
+        input {
+            padding: 20px;
+        }
+
+        button.success {
+            background-color: green;
+            color: white
+        }
+
+        button.danger {
+            background-color: red;
+            color: white
+        }
+
+        button.warning {
+            background-color: orange;
+            color: white
+        }
+
+        button.disabled {
+            background-color: gray;
+            color: black
+        }
+
+        button.default {
+            background-color: white;
+            color: black
+        }
+    </style>
+</head>
+
+<body>
+
+    <form class="form">
+        <input type="text" placeholder="some dummy input">
+        <div id="actions1">
+            <!-- insert buttons inside this element! -->
+        </div>
+        <div id="actions2">
+            <!-- insert buttons inside this element! -->
+        </div>
+    </form>
+
+    <script>
+
+        class Button {
+            constructor(text,type,action) {
+               this.text = text
+               if(this.text =="OK" || this.text == "CANCEL") {
+                this.type = type
+            }else {
+                this.type = "warning"
+            }
+               this.action = action
+            }
+            render(parrent_id) {
+                // hint: html representation of the button - <button class="???" onclick="???">???</button> 
+            parrent_id.innerHTML= `
+            <button class="${this.type}" onclick="${this.action}">${this.text}</button>
+            `
+            }
+        }
+        let b1 = new Button("OK","success","okAction()")
+        b1.render(actions1)
+        class Buttons extends Button {
+            render() {
+                // hint: html representation of the button - <button class="???" onclick="???">???</button> 
+                actions2.innerHTML = `
+            <button class="${b2.type}" onclick="${b2.action}">${b2.text}</button>
+            `
+            }
+        }
+        let b2 = new Buttons("CANCEL","danger","cancelAction()")
+        b2.render()
+
+
+        function okAction() {
+            alert("You've accepted")
+        }
+        function cancelAction() {
+            alert("You've canceled")
+        }
+    </script>
+</body>
+
+</html>
